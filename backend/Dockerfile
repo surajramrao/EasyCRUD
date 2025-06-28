@@ -8,4 +8,5 @@ Copy . .
 
 Run mvn clean package -DskipTests
 
-CMD ["-jar","java","target/*.jar"]
+CMD ["java", "-jar", "target/student-registration-backend-0.0.1-SNAPSHOT.jar"]
+
