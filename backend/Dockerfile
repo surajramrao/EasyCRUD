@@ -6,6 +6,6 @@ Workdir /app
 
 Copy . .
 
-Run maven clean package -DskipTests
+Run mvn clean package -DskipTests
 
 CMD ["-jar","java","target/*.jar"]
