@@ -4,7 +4,7 @@ Label env=backend
 
 Workdir /app
 
-copy . .
+Copy . .
 
 Run maven clean package -DskipTests
 
