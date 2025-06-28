@@ -1,13 +1,13 @@
-From node:24-alpine
+FROM node:24-alpine AS builder
 
-workdir /app
+WORKDIR /app
 
-copy . .
+COPY . .
 
 RUN npm install && npm run build
 
-From nginx:alpine
+FROM nginx:1.29.0-alpine-slim
 
-Expose 80
+EXPOSE 80
 
-Copy /app/dist/* /usr/share/nginx/html/
+COPY --from=builder /app/dist /usr/share/nginx/html
