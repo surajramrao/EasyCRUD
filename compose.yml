@@ -1,3 +1,18 @@
 version: "3.9"
+services:
+  database:
+    image: mysql
+    volume:
+      my-volume
+    network:
+      my-network
+    ports:
+      -3900:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=redhat
+      - MYSQL_USER=suraj
+      - MYSQL_PASSWORD=redhat123
+      - MYSQL_DATABASE=studentapp-database
+
 
 
