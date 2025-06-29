@@ -2,17 +2,52 @@ version: "3.9"
 services:
   database:
     image: mysql
-    volume:
-      my-volume
-    network:
-      my-network
+    container_name: db-server
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-network
     ports:
-      -3900:3306
+      - 3900:3306
     environment:
       - MYSQL_ROOT_PASSWORD=redhat
       - MYSQL_USER=suraj
       - MYSQL_PASSWORD=redhat123
       - MYSQL_DATABASE=studentapp-database
+  backend:
+    build:
+     context: ./backend
+     dockerfile: Dockerfile
+    container_name: backend-server
+    networks:
+      - my-network
+    environment:
+      - DB_URL=jdbc:mysql://db-server:3306/studentapp_database
+      - DB_User=suraj
+      - DB_Pass=redhat123
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+  frontend:
+    build:
+     context: ./frontend
+     dockerfile: Dockerfile
+    container_name: frontend-server
+    networks:
+      - my-network
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+volumes:
+  mysql-data:
+networks:
+  my-network:
+    
 
+
+  
+      
 
 
