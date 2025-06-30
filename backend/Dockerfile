@@ -1,12 +1,12 @@
-From maven:3.8.3-openjdk-17-slim
+FROM maven:3.8.3-openjdk-17-slim
 
-Label env=backend
+LABEL env=backend
 
-Workdir /app
+WORKDIR /app
 
-Copy . .
+COPY . .
 
-Run mvn clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 CMD ["java", "-jar", "target/student-registration-backend-0.0.1-SNAPSHOT.jar"]
 
